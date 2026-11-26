@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gruhapravesam Website Invitation - Vallapudasu Family</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Great+Vibes&family=Lora:ital,wght@0,400;0,600;1,400&family=Noto+Serif+Telugu:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #4a0d13 0%, #1c0407 100%);
+      font-family: 'Lora', Georgia, serif;
+      color: #3b1c1c;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ---------------- LANGUAGE RULES ---------------- */
+    .te {
+      font-family: 'Noto Serif Telugu', serif;
+      line-height: 1.5;
+    }
+    body.lang-en .te { display: none; }
+    body.lang-te .en { display: none; }
+    body.lang-both .te { display: block; margin-bottom: 4px; }
+
+    /* ---------------- TOP NAVIGATION BAR ---------------- */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(43, 10, 13, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.45);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand {
+      font-family: 'Cinzel', serif;
+      color: #f3d78a;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .lang-switcher {
+      display: flex;
+      gap: 8px;
+    }
+
+    .lang-btn {
+      background: rgba(122, 18, 28, 0.7);
+      color: #f3d78a;
+      border: 1px solid #d4af37;
+      padding: 6px 14px;
+      font-family: 'Cinzel', 'Noto Serif Telugu', serif;
+      font-size: 0.8rem;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.25s ease;
+    }
+
+    .lang-btn.active {
+      background: linear-gradient(145deg, #e6c25b, #b8860b);
+      color: #2b0a0d;
+      font-weight: 700;
+    }
+
+    /* ---------------- WELCOME COVER OVERLAY ---------------- */
+    .cover-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: radial-gradient(circle at center, #6e1019 0%, #240508 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .cover-overlay.hidden {
+      opacity: 0;
+      transform: translateY(-100%);
+      pointer-events: none;
+    }
+
+    .cover-card {
+      max-width: 460px;
+      width: 100%;
+      padding: 40px 28px;
+      border: 6px double #d4af37;
+      outline: 2px solid rgba(212, 175, 55, 0.45);
+      outline-offset: -14px;
+      background: rgba(43, 8, 12, 0.75);
+      text-align: center;
+      color: #fdf5e6;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+    }
+
+    .ganesh-svg {
+      width: 115px;
+      height: 115px;
+      margin: 0 auto 12px;
+      display: block;
+      filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.35));
+    }
+
+    .cover-blessing {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      letter-spacing: 2.5px;
+      color: #f3d78a;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .cover-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.2rem;
+      color: #ffdf80;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .cover-title .te {
+      font-size: 2.1rem;
+      font-weight: 700;
+    }
+
+    .cover-family {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      color: #fdf5e6;
+      margin: 14px 0 28px;
+    }
+
+    .open-btn {
+      background: linear-gradient(145deg, #e6c25b, #b8860b);
+      color: #2b0a0d;
+      border: 2px solid #fff3c4;
+      padding: 12px 28px;
+      font-family: 'Cinzel', 'Noto Serif Telugu', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      transition: transform 0.25s ease;
+    }
+
+    .open-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* ---------------- MAIN WEBSITE CONTAINER ---------------- */
+    .website-wrapper {
+      max-width: 820px;
+      margin: 36px auto 50px;
+      padding: 0 18px;
+    }
+
+    .invite-sheet {
+      background: linear-gradient(160deg, #fffdf7 0%, #fdf4e3 100%);
+      border: 8px double #b8860b;
+      outline: 3px solid #7a121c;
+      outline-offset: -16px;
+      padding: 48px 36px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
+      text-align: center;
+    }
+
+    .section-blessing {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      letter-spacing: 2.5px;
+      color: #7a121c;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .mantra {
+      font-style: italic;
+      font-size: 0.95rem;
+      color: #6b4c35;
+      max-width: 560px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+    }
+
+    .divider {
+      width: 180px;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #b8860b, transparent);
+      margin: 24px auto;
+    }
+
+    .hosts-label {
+      font-style: italic;
+      color: #5c3a21;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .hosts {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #7a121c;
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+
+    .hosts .te {
+      font-size: 1.15rem;
+    }
+
+    .invite-message {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #4a2c2a;
+      max-width: 560px;
+      margin: 0 auto 18px;
+    }
+
+    .hero-event {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.6rem;
+      color: #b8860b;
+      line-height: 1.15;
+      margin: 10px 0 4px;
+    }
+
+    .hero-event .te {
+      font-size: 2.3rem;
+      font-weight: 700;
+    }
+
+    .hero-sub {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      letter-spacing: 3px;
+      color: #7a121c;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    /* ---------------- SCHEDULE & VENUE GRID ---------------- */
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin: 26px 0;
+    }
+
+    .detail-card {
+      background: rgba(184, 134, 11, 0.08);
+      border: 1px solid #d4af37;
+      padding: 20px 16px;
+      border-radius: 4px;
+    }
+
+    .detail-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      color: #7a121c;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .detail-value {
+      font-size: 1rem;
+      color: #3b1c1c;
+      line-height: 1.5;
+    }
+
+    /* ---------------- VENUE BOX ---------------- */
+    .venue-box {
+      background: rgba(122, 18, 28, 0.05);
+      border-top: 2px solid #d4af37;
+      border-bottom: 2px solid #d4af37;
+      padding: 22px 18px;
+      margin: 24px 0;
+    }
+
+    /* ---------------- COMPLIMENTS & FOOTER ---------------- */
+    .compliments-label {
+      font-style: italic;
+      color: #6b4c35;
+      font-size: 0.95rem;
+      margin-top: 12px;
+    }
+
+    .son-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #7a121c;
+      margin: 8px 0 6px;
+    }
+
+    .son-name .te {
+      font-size: 1.15rem;
+    }
+
+    .contact-line {
+      font-size: 0.95rem;
+      color: #5c3a21;
+      margin-top: 10px;
+    }
+
+    .action-row {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      background: #7a121c;
+      color: #fdf5e6;
+      border: 1px solid #d4af37;
+      padding: 10px 20px;
+      font-family: 'Cinzel', 'Noto Serif Telugu', serif;
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.25s ease;
+    }
+
+    .action-btn:hover {
+      background: #5a0d14;
+    }
+
+    @media (max-width: 600px) {
+      .invite-sheet { padding: 34px 20px; }
+      .hero-event { font-size: 2.7rem; }
+      .hosts { font-size: 1.1rem; }
+    }
+
+    @media print {
+      .top-bar, .cover-overlay, .action-row { display: none !important; }
+      body { background: none; }
+      .website-wrapper { margin: 0; padding: 0; }
+      .invite-sheet { box-shadow: none; }
+    }
+  </style>
+</head>
+<body class="lang-both">
+
+  <!-- WELCOME COVER SCREEN -->
+  <div class="cover-overlay" id="coverOverlay">
+    <div class="cover-card">
+      <!-- Lord Ganesh SVG Emblem -->
+      <svg class="ganesh-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Lord Ganesh">
+        <circle cx="60" cy="60" r="54" stroke="#d4af37" stroke-width="2" stroke-dasharray="4 4"/>
+        <!-- Crown / Mukut -->
+        <path d="M44 36 C48 22, 72 22, 76 36 Z" fill="#e6c25b"/>
+        <circle cx="60" cy="18" r="4" fill="#ffdf80"/>
+        <!-- Ears -->
+        <path d="M40 44 C22 40, 20 68, 38 66" stroke="#e6c25b" stroke-width="3.5" stroke-linecap="round" fill="rgba(230,194,91,0.18)"/>
+        <path d="M80 44 C98 40, 100 68, 82 66" stroke="#e6c25b" stroke-width="3.5" stroke-linecap="round" fill="rgba(230,194,91,0.18)"/>
+        <!-- Face & Trunk -->
+        <path d="M42 42 C42 32, 78 32, 78 42 C78 58, 70 66, 62 68 C58 76, 66 84, 72 80 C76 78, 76 72, 72 72" stroke="#ffdf80" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Tilak -->
+        <path d="M60 40 L60 48" stroke="#ff5252" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Eyes -->
+        <circle cx="51" cy="50" r="2.2" fill="#ffdf80"/>
+        <circle cx="69" cy="50" r="2.2" fill="#ffdf80"/>
+        <!-- Lotus Base -->
+        <path d="M36 92 Q60 104 84 92 Q60 96 36 92 Z" fill="#d4af37"/>
+      </svg>
+
+      <div class="cover-blessing">
+        <span class="te">శ్రీ గణేశాయ నమః</span>
+        <span class="en">Sri Ganeshaya Namaha</span>
+      </div>
+
+      <h1 class="cover-title">
+        <span class="te">గృహప్రవేశం</span>
+        <span class="en">House Warming</span>
+      </h1>
+
+      <div class="cover-family">
+        <span class="te">వల్లపుదాసు కుటుంబ ఆహ్వానం</span>
+        <span class="en">Vallapudasu Family Invitation</span>
+      </div>
+
+      <button class="open-btn" onclick="openWebsite()">
+        <span class="te">ఆహ్వానం తెరవండి</span>
+        <span class="en">Open Invitation</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <div class="brand">Vallapudasu Family</div>
+    <div class="lang-switcher">
+      <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">English</button>
+      <button class="lang-btn" id="btn-te" onclick="setLanguage('te')">తెలుగు</button>
+      <button class="lang-btn active" id="btn-both" onclick="setLanguage('both')">Both</button>
+    </div>
+  </header>
+
+  <!-- MAIN INVITATION WEBSITE -->
+  <main class="website-wrapper">
+    <section class="invite-sheet">
+      <!-- Lord Ganesh SVG -->
+      <svg class="ganesh-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Lord Ganesh">
+        <circle cx="60" cy="60" r="54" stroke="#b8860b" stroke-width="2" stroke-dasharray="4 4"/>
+        <path d="M44 36 C48 22, 72 22, 76 36 Z" fill="#b8860b"/>
+        <circle cx="60" cy="18" r="4" fill="#d4af37"/>
+        <path d="M40 44 C22 40, 20 68, 38 66" stroke="#7a121c" stroke-width="3.5" stroke-linecap="round" fill="rgba(184,134,11,0.12)"/>
+        <path d="M80 44 C98 40, 100 68, 82 66" stroke="#7a121c" stroke-width="3.5" stroke-linecap="round" fill="rgba(184,134,11,0.12)"/>
+        <path d="M42 42 C42 32, 78 32, 78 42 C78 58, 70 66, 62 68 C58 76, 66 84, 72 80 C76 78, 76 72, 72 72" stroke="#7a121c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M60 40 L60 48" stroke="#c62828" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="51" cy="50" r="2.2" fill="#7a121c"/>
+        <circle cx="69" cy="50" r="2.2" fill="#7a121c"/>
+        <path d="M36 92 Q60 104 84 92 Q60 96 36 92 Z" fill="#b8860b"/>
+      </svg>
+
+      <div class="section-blessing">
+        <span class="te">శ్రీ గణేశాయ నమః</span>
+        <span class="en">Sri Ganeshaya Namaha</span>
+      </div>
+
+      <p class="mantra">
+        <span class="te">వక్రతుండ మహాకాయ సూర్యకోటి సమప్రభ | నిర్విఘ్నం కురుమే దేవ సర్వకార్యేషు సర్వదా ||</span>
+        <span class="en">Vakratunda Mahakaya Suryakoti Samaprabha, Nirvighnam Kuru Me Deva Sarva-Karyeshu Sarvada.</span>
+      </p>
+
+      <div class="divider"></div>
+
+      <p class="hosts-label">
+        <span class="te">భగవంతుని మరియు పెద్దల ఆశీస్సులతో</span>
+        <span class="en">With the blessings of Almighty and Elders</span>
+      </p>
+
+      <div class="hosts">
+        <span class="te">
+          శ్రీమతి వల్లపుదాసు రమాదేవి గౌడ్<br>
+          &amp; శ్రీ వల్లపుదాసు శ్రీశైలం గౌడ్
+        </span>
+        <span class="en">
+          Smt. Vallapudasu Ramadevi Goud<br>
+          &amp; Sri Vallapudasu Srisailam Goud
+        </span>
+      </div>
+
+      <p class="invite-message">
+        <span class="te">మా నూతన గృహప్రవేశ శుభకార్యానికి మీరు మీ కుటుంబ సమేతంగా విచ్చేసి, మమ్ములను ఆశీర్వదించవలసినదిగా కోరుచున్నాము.</span>
+        <span class="en">Cordially invite you and your family to grace the auspicious occasion of our</span>
+      </p>
+
+      <h1 class="hero-event">
+        <span class="te">గృహప్రవేశం</span>
+        <span class="en">House Warming Ceremony</span>
+      </h1>
+      <div class="hero-sub">
+        <span class="te">శుభ ఆహ్వానం</span>
+        <span class="en">Gruhapravesam</span>
+      </div>
+
+      <!-- SCHEDULE CARDS -->
+      <div class="details-grid">
+        <div class="detail-card">
+          <div class="detail-title">
+            <span class="te">తేదీ</span>
+            <span class="en">Date</span>
+          </div>
+          <div class="detail-value">[Day, DD Month YYYY]</div>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-title">
+            <span class="te">సుముహూర్తం</span>
+            <span class="en">Sumuhurtham</span>
+          </div>
+          <div class="detail-value">[HH:MM AM] onwards</div>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-title">
+            <span class="te">విందు</span>
+            <span class="en">Lunch</span>
+          </div>
+          <div class="detail-value">[12:30 PM] onwards</div>
+        </div>
+      </div>
+
+      <!-- VENUE -->
+      <div class="venue-box">
+        <div class="detail-title">
+          <span class="te">వేదిక</span>
+          <span class="en">Venue</span>
+        </div>
+        <div class="detail-value">
+          [House No., Street Name, Locality, City - PIN Code]
+        </div>
+      </div>
+
+      <!-- COMPLIMENTS -->
+      <p class="compliments-label">
+        <span class="te">మీ రాకను ఆకాంక్షిస్తూ</span>
+        <span class="en">With Best Compliments From</span>
+      </p>
+      <div class="son-name">
+        <span class="te">వల్లపుదాసు యశ్వంత్ గౌడ్</span>
+        <span class="en">Vallapudasu Yashwanth Goud</span>
+      </div>
+      <div class="contact-line">
+        <span class="te">మరియు బంధుమిత్రులు &bull; సంప్రదించండి: [+91 XXXXX XXXXX]</span>
+        <span class="en">Near &amp; Dear &bull; Contact: [+91 XXXXX XXXXX]</span>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="action-row">
+        <button class="action-btn" onclick="window.print()">Print / Save PDF</button>
+        <button class="action-btn" onclick="closeWebsite()">View Cover Again</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function openWebsite() {
+      document.getElementById('coverOverlay').classList.add('hidden');
+    }
+
+    function closeWebsite() {
+      document.getElementById('coverOverlay').classList.remove('hidden');
+    }
+
+    function setLanguage(lang) {
+      document.body.className = 'lang-' + lang;
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('btn-' + lang).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
